@@ -18,7 +18,7 @@ export const DOCTOR = {
 };
 
 export const TIMINGS = [
-  { day: 'Monday – Friday', morning: '9:00 AM – 1:00 PM', evening: '5:00 PM – 8:00 PM' },
+  { day: 'Monday – Friday', morning: '9:00 AM – 1:00 PM', evening: '5:00 PM – 7:00 PM' },
   { day: 'Saturday', morning: '9:00 AM – 2:00 PM', evening: '5:00 PM – 7:00 PM' },
   { day: 'Sunday', morning: '10:00 AM – 12:00 PM', evening: 'Closed' },
 ];
