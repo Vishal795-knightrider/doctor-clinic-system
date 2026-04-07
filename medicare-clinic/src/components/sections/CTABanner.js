@@ -26,7 +26,7 @@ export default function CTABanner() {
                 Book Appointment
                 <ArrowRight size={16} />
               </Link>
-              <a href="tel:+919876543210"
+              <a href="tel:+919568549366"
                 className="inline-flex items-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-2xl transition-all text-sm">
                 <Phone size={18} />
                 Call Now

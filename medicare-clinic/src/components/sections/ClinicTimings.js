@@ -58,7 +58,7 @@ export default function ClinicTimings({ timings }) {
               ))}
             </div>
             <div className="px-4 pb-4 mt-2">
-              <a href="tel:+919876543210"
+              <a href="tel:+919568549366"
                 className="block text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-2xl text-sm transition-colors">
                 Call for Appointment
               </a>
