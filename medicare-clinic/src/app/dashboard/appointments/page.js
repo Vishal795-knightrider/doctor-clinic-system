@@ -133,7 +133,7 @@ export default function AppointmentsPage() {
             <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Trash2 size={26} className="text-red-500" />
             </div>
-            <h3 className="font-semibold text-slate-900 text-lg mb-2">Delete Appointment?</h3>
+            <h3 className="font-semibold text-slate-900 text-lg mb-2">Delete Appointment ?</h3>
             <p className="text-slate-500 text-sm mb-6">This action cannot be undone.</p>
             <div className="flex gap-3">
               <button onClick={() => setDeleteId(null)} className="btn-outline flex-1 justify-center">Cancel</button>
