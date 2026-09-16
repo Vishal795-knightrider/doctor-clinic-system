@@ -2,9 +2,7 @@
 
 **Project:** Online Doctor Appointment System  
 **Clinic:** MediCare Clinic (Kafiyabad, Moradabad, Uttar Pradesh, India)  
-**Team Members:** Vishal Kashyap, Vishal Kumar, Shubham Mourya  
-**Document Version:** 1.0  
-**Date:** September 2026  
+**Team Members:** Vishal Kashyap, Vishal Kumar, Shubham Mourya , Satvik Shrivastav
 
 ---
 

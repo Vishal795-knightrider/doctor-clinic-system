@@ -16,6 +16,7 @@ A web-based clinic management and doctor appointment scheduling system developed
 * Vishal Kashyap
 * Vishal Kumar
 * Shubham Mourya
+* Satvik Shrivastav
 
 ---
 
