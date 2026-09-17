@@ -142,6 +142,10 @@ This module enforces identity verification and role-based permissions:
 * **Logout (*Implemented in Dashboard*):** Clears user sessions and returns the user to the public home page.
 * **Password Protection (*Proposed*):** Hashing passwords with salted bcrypt encryption before storage.
 
+### 4.5 UML Use Case Diagram
+
+![Online Doctor Appointment System - UML Use Case Diagram](./use-case-diagram.png)
+
 ---
 
 ## 5. Technology Stack
