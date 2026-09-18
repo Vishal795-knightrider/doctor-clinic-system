@@ -2,7 +2,7 @@
 import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PublicLayout from '@/components/layout/PublicLayout';
-import { Calendar, Clock, User, Phone, Mail, FileText, CheckCircle2, ArrowRight, ShieldCheck, Activity, Stethoscope, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, Phone, Mail, FileText, CheckCircle2, ArrowRight, ShieldCheck, Activity, Stethoscope } from 'lucide-react';
 
 const TIME_SLOTS = [
   { time: '9:00 AM', shift: 'Morning' },
@@ -33,7 +33,6 @@ function AppointmentForm() {
   const initialSpecialty = searchParams.get('specialty') || 'General Health Checkup';
   const initialConcern = searchParams.get('concern') || '';
 
-
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -55,53 +54,50 @@ function AppointmentForm() {
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 900);
+    }, 800);
   };
 
   if (submitted) {
     return (
       <PublicLayout>
-        <div className="min-h-[80vh] flex items-center justify-center py-20 px-4">
-          <div className="max-w-lg w-full bg-[#0c111e]/95 backdrop-blur-2xl border border-white/[0.08] rounded-[32px] p-8 sm:p-10 text-center shadow-2xl relative overflow-hidden">
-            {/* Top ambient glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-emerald-500/15 blur-[60px] pointer-events-none" />
-
-            <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5 text-emerald-400">
-              <CheckCircle2 size={36} />
+        <div className="min-h-[80vh] flex items-center justify-center py-20 px-4 bg-zinc-50 dark:bg-black transition-colors duration-200">
+          <div className="max-w-md w-full bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 text-center shadow-lg">
+            <div className="w-14 h-14 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600 dark:text-emerald-400">
+              <CheckCircle2 size={30} />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono mb-3">
               <span>TOKEN RESERVED: #21</span>
             </div>
 
-            <h2 className="heading-display text-2xl sm:text-3xl text-white mb-2">
+            <h2 className="text-2xl font-bold text-zinc-950 dark:text-white mb-1.5">
               Appointment Confirmed!
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm mb-6">
-              Thank you, <strong className="text-white">{form.name}</strong>. Your consultation has been scheduled with Dr. Vishal Kashyap.
+            <p className="text-zinc-600 dark:text-zinc-400 text-xs mb-6">
+              Thank you, <strong className="text-zinc-900 dark:text-white">{form.name}</strong>. Your appointment has been registered with Dr. Vishal Kashyap.
             </p>
 
-            {/* Digital Token Ticket */}
-            <div className="bg-[#070a12] rounded-2xl p-5 border border-white/[0.08] text-left space-y-3 font-mono text-xs mb-8">
-              <div className="flex justify-between border-b border-white/[0.05] pb-2">
-                <span className="text-slate-500">Patient:</span>
-                <span className="text-white font-semibold">{form.name}</span>
+            {/* Token Ticket */}
+            <div className="bg-zinc-50 dark:bg-[#070709] rounded-2xl p-5 border border-zinc-200 dark:border-zinc-800/80 text-left space-y-2.5 font-mono text-xs mb-6">
+              <div className="flex justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-2">
+                <span className="text-zinc-500">Patient:</span>
+                <span className="text-zinc-900 dark:text-white font-semibold">{form.name}</span>
               </div>
-              <div className="flex justify-between border-b border-white/[0.05] pb-2">
-                <span className="text-slate-500">Phone:</span>
-                <span className="text-white">{form.phone}</span>
+              <div className="flex justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-2">
+                <span className="text-zinc-500">Phone:</span>
+                <span className="text-zinc-900 dark:text-white">{form.phone}</span>
               </div>
-              <div className="flex justify-between border-b border-white/[0.05] pb-2">
-                <span className="text-slate-500">Date & Slot:</span>
-                <span className="text-cyan-400 font-semibold">{form.date} • {form.time}</span>
+              <div className="flex justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-2">
+                <span className="text-zinc-500">Date & Slot:</span>
+                <span className="text-zinc-900 dark:text-white font-semibold">{form.date} • {form.time}</span>
               </div>
-              <div className="flex justify-between border-b border-white/[0.05] pb-2">
-                <span className="text-slate-500">Specialty:</span>
-                <span className="text-blue-400">{form.specialty}</span>
+              <div className="flex justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-2">
+                <span className="text-zinc-500">Specialty:</span>
+                <span className="text-zinc-900 dark:text-white">{form.specialty}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Location:</span>
-                <span className="text-slate-300">OPD Room 1, Moradabad</span>
+                <span className="text-zinc-500">Location:</span>
+                <span className="text-zinc-700 dark:text-zinc-300">OPD Room 1, Moradabad</span>
               </div>
             </div>
 
@@ -118,7 +114,7 @@ function AppointmentForm() {
                   problem: '',
                 });
               }}
-              className="btn-white w-full py-3.5 text-xs font-semibold rounded-xl"
+              className="btn-primary w-full py-3 text-xs font-semibold rounded-xl"
             >
               Book Another Appointment
             </button>
@@ -131,101 +127,89 @@ function AppointmentForm() {
   return (
     <PublicLayout>
       {/* Header Banner */}
-      <section className="py-16 bg-[#06080e] border-b border-white/[0.06] relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[250px] bg-blue-600/10 blur-[130px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium backdrop-blur-md">
-            <Sparkles size={13} />
-            <span>Digital Token Reservation</span>
+      <section className="py-16 bg-white dark:bg-black border-b border-zinc-200 dark:border-zinc-900 transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-3">
+          <div className="agentic-pill">
+            <span className="text-[11px] font-medium tracking-wide">
+              Token Reservation
+            </span>
           </div>
-          <h1 className="heading-display text-3xl sm:text-5xl text-white">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-zinc-950 dark:text-white tracking-tight">
             Schedule Your Consultation
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-            Reserve your appointment slot online with Dr. Vishal Kashyap. Skip the lobby line and arrive at your scheduled token time.
+          <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm max-w-xl mx-auto">
+            Reserve your consultation slot online with Dr. Vishal Kashyap. Arrive at your allocated token time and bypass lobby waiting.
           </p>
         </div>
       </section>
 
       {/* Main Split Section */}
-      <section className="py-16 bg-[#080b12]">
+      <section className="py-16 bg-zinc-50 dark:bg-black transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Left Column: Live Digital Pass Preview & Clinic Facts */}
-            <div className="lg:col-span-5 space-y-6">
-              {/* Interactive Live Preview Pass */}
-              <div className="bg-[#0c111e]/95 backdrop-blur-xl border border-white/[0.08] rounded-3xl p-6 sm:p-7 shadow-card relative overflow-hidden">
-                <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white">
-                      <Activity size={16} />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Left Column: Live Digital Pass Preview */}
+            <div className="lg:col-span-5 space-y-5">
+              <div className="bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+                <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-xs">
+                      <Activity size={15} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white text-sm">Digital Outpatient Pass</h3>
-                      <p className="text-[10px] text-slate-400">Live Preview Before Confirmation</p>
+                      <h3 className="font-semibold text-zinc-950 dark:text-white text-xs">Digital Outpatient Pass</h3>
+                      <p className="text-[10px] text-zinc-500 font-mono">Live Ticket Preview</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20">
-                    PENDING CONFIRMATION
+                  <span className="text-[10px] font-mono bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 px-2 py-0.5 rounded">
+                    PREVIEW
                   </span>
                 </div>
 
                 {/* Ticket Details */}
-                <div className="space-y-3.5 font-mono text-xs">
-                  <div className="bg-[#070a12] p-4 rounded-2xl border border-white/[0.05] space-y-2">
+                <div className="space-y-3 font-mono text-xs">
+                  <div className="bg-zinc-50 dark:bg-[#070709] p-4 rounded-xl border border-zinc-200 dark:border-zinc-800/80 space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-slate-500 text-[11px]">Patient Name:</span>
-                      <span className="text-white font-semibold font-sans">
-                        {form.name || 'Enter name in form'}
+                      <span className="text-zinc-500 text-[11px]">Patient Name:</span>
+                      <span className="text-zinc-900 dark:text-white font-semibold font-sans">
+                        {form.name || 'Enter name'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 text-[11px]">Contact Phone:</span>
-                      <span className="text-slate-300">
-                        {form.phone || 'Enter phone in form'}
+                      <span className="text-zinc-500 text-[11px]">Contact Phone:</span>
+                      <span className="text-zinc-700 dark:text-zinc-300">
+                        {form.phone || 'Enter phone'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 text-[11px]">Selected Date:</span>
-                      <span className="text-cyan-400 font-semibold">{form.date}</span>
+                      <span className="text-zinc-500 text-[11px]">Selected Date:</span>
+                      <span className="text-zinc-900 dark:text-white font-semibold">{form.date}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 text-[11px]">Allocated Slot:</span>
-                      <span className="text-emerald-400 font-semibold">{form.time}</span>
+                      <span className="text-zinc-500 text-[11px]">Allocated Slot:</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{form.time}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500 text-[11px]">Specialty:</span>
-                      <span className="text-blue-400">{form.specialty}</span>
+                      <span className="text-zinc-500 text-[11px]">Specialty:</span>
+                      <span className="text-zinc-800 dark:text-zinc-200">{form.specialty}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 pt-2 text-[11px] text-slate-400">
-                    <ShieldCheck size={16} className="text-emerald-400 shrink-0" />
-                    <span>Dr. Vishal Kashyap (MD, Internal Medicine) • Room 1</span>
+                  <div className="flex items-center gap-2 pt-1 text-[11px] text-zinc-500">
+                    <ShieldCheck size={14} className="text-emerald-500 shrink-0" />
+                    <span>Dr. Vishal Kashyap (MD, AIIMS Alum) • Room 1</span>
                   </div>
                 </div>
               </div>
 
-              {/* Clinic Operational Info Card */}
-              <div className="bg-[#0c111e]/90 backdrop-blur-xl border border-white/[0.08] rounded-3xl p-6 space-y-4">
-                <h4 className="font-semibold text-white text-sm flex items-center gap-2">
-                  <Stethoscope size={16} className="text-blue-400" />
-                  What to expect on your visit:
+              <div className="bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-3 shadow-sm text-xs">
+                <h4 className="font-semibold text-zinc-950 dark:text-white flex items-center gap-2">
+                  <Stethoscope size={14} />
+                  Clinic guidelines:
                 </h4>
-                <ul className="space-y-2.5 text-xs text-slate-400">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 size={13} className="text-blue-400 shrink-0 mt-0.5" />
-                    <span>Show this digital token at the reception desk upon arrival.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 size={13} className="text-blue-400 shrink-0 mt-0.5" />
-                    <span>Average wait time with pre-booked token is under 10 minutes.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 size={13} className="text-blue-400 shrink-0 mt-0.5" />
-                    <span>Complimentary 7-day follow-up consultation included.</span>
-                  </li>
+                <ul className="space-y-2 text-zinc-600 dark:text-zinc-400 font-mono text-[11px]">
+                  <li>• Present this token number at the reception desk.</li>
+                  <li>• Free follow-up consultation within 7 days.</li>
+                  <li>• No upfront pre-payment required online.</li>
                 </ul>
               </div>
             </div>
@@ -234,19 +218,19 @@ function AppointmentForm() {
             <div className="lg:col-span-7">
               <form
                 onSubmit={handleSubmit}
-                className="bg-[#0c111e]/95 backdrop-blur-xl border border-white/[0.08] rounded-3xl p-8 sm:p-10 space-y-6 shadow-card"
+                className="bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm"
               >
                 <div>
-                  <h2 className="text-xl font-bold text-white font-display">Patient Details</h2>
-                  <p className="text-xs text-slate-400 mt-1">
-                    Please provide accurate contact info so we can send your digital token.
+                  <h2 className="text-lg font-bold text-zinc-950 dark:text-white font-display">Patient Details</h2>
+                  <p className="text-xs text-zinc-500 mt-0.5">
+                    Enter details to reserve your consultation token.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="label">
-                      <User size={12} className="inline mr-1 text-blue-400" /> Full Name *
+                      <User size={11} className="inline mr-1" /> Full Name *
                     </label>
                     <input
                       required
@@ -259,7 +243,7 @@ function AppointmentForm() {
 
                   <div>
                     <label className="label">
-                      <Phone size={12} className="inline mr-1 text-blue-400" /> Phone Number *
+                      <Phone size={11} className="inline mr-1" /> Phone Number *
                     </label>
                     <input
                       required
@@ -272,7 +256,7 @@ function AppointmentForm() {
 
                   <div>
                     <label className="label">
-                      <Mail size={12} className="inline mr-1 text-blue-400" /> Email (Optional)
+                      <Mail size={11} className="inline mr-1" /> Email (Optional)
                     </label>
                     <input
                       type="email"
@@ -285,7 +269,7 @@ function AppointmentForm() {
 
                   <div>
                     <label className="label">
-                      <Calendar size={12} className="inline mr-1 text-blue-400" /> Preferred Date *
+                      <Calendar size={11} className="inline mr-1" /> Preferred Date *
                     </label>
                     <input
                       required
@@ -298,28 +282,28 @@ function AppointmentForm() {
                   </div>
                 </div>
 
-                {/* Specialty Selection */}
+                {/* Specialty */}
                 <div>
                   <label className="label">Department / Specialization</label>
                   <select
-                    className="input"
+                    className="input font-mono text-xs"
                     value={form.specialty}
                     onChange={(e) => update('specialty', e.target.value)}
                   >
                     {SPECIALTIES.map((s) => (
-                      <option key={s} value={s} className="bg-slate-900 text-white">
+                      <option key={s} value={s}>
                         {s}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                {/* Preferred Time Slot Grid */}
+                {/* Time Slots */}
                 <div>
                   <label className="label">
-                    <Clock size={12} className="inline mr-1 text-blue-400" /> Choose Consultation Slot *
+                    <Clock size={11} className="inline mr-1" /> Select Consultation Slot *
                   </label>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 mt-2">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 mt-1.5">
                     {TIME_SLOTS.map((slot) => {
                       const isSelected = form.time === slot.time;
                       return (
@@ -327,10 +311,10 @@ function AppointmentForm() {
                           key={slot.time}
                           type="button"
                           onClick={() => update('time', slot.time)}
-                          className={`px-3 py-2.5 rounded-xl text-xs font-mono font-medium transition-all ${
+                          className={`px-2.5 py-2 rounded-lg text-xs font-mono font-medium transition-all ${
                             isSelected
-                              ? 'bg-blue-600 text-white border-blue-500 shadow-glow-brand/50'
-                              : 'bg-white/[0.03] text-slate-300 border border-white/10 hover:border-white/20'
+                              ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm'
+                              : 'bg-zinc-50 dark:bg-[#070709] text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600'
                           }`}
                         >
                           {slot.time}
@@ -340,16 +324,16 @@ function AppointmentForm() {
                   </div>
                 </div>
 
-                {/* Health Concern */}
+                {/* Concern */}
                 <div>
                   <label className="label">
-                    <FileText size={12} className="inline mr-1 text-blue-400" /> Health Concern or Symptoms *
+                    <FileText size={11} className="inline mr-1" /> Health Concern or Symptoms *
                   </label>
                   <textarea
                     required
                     rows={3}
                     className="input resize-none"
-                    placeholder="Briefly describe your symptoms or reason for doctor consultation..."
+                    placeholder="Describe symptoms or reason for visit..."
                     value={form.problem}
                     onChange={(e) => update('problem', e.target.value)}
                   />
@@ -358,23 +342,20 @@ function AppointmentForm() {
                 <button
                   type="submit"
                   disabled={loading || !form.time || !form.name || !form.phone}
-                  className="btn-white w-full py-4 text-xs font-semibold rounded-2xl flex items-center justify-center gap-2 shadow-xl group mt-2"
+                  className="btn-primary w-full py-3.5 text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-sm mt-2"
                 >
                   {loading ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                      <span>Generating Digital Token...</span>
-                    </span>
+                    <span>Allocating Token...</span>
                   ) : (
                     <>
-                      <span>Confirm & Reserve Appointment Slot</span>
-                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      <span>Confirm & Reserve Slot</span>
+                      <ArrowRight size={13} />
                     </>
                   )}
                 </button>
 
-                <p className="text-[11px] text-slate-500 text-center font-mono">
-                  🔒 Your medical privacy is strictly protected under HIPAA & clinical secrecy guidelines.
+                <p className="text-[11px] text-zinc-400 dark:text-zinc-500 text-center font-mono">
+                  🔒 Medical privacy strictly protected under clinical confidentiality standards.
                 </p>
               </form>
             </div>
@@ -389,11 +370,8 @@ export default function AppointmentPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#06080e] flex items-center justify-center text-white text-sm font-mono">
-          <div className="flex items-center gap-3">
-            <span className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <span>Loading Appointment Portal...</span>
-          </div>
+        <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center text-xs font-mono">
+          <span>Loading Appointment Portal...</span>
         </div>
       }
     >
@@ -401,4 +379,3 @@ export default function AppointmentPage() {
     </Suspense>
   );
 }
-

@@ -1,59 +1,52 @@
 import Link from 'next/link';
-import { Activity, Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
+import { Activity, Phone, Mail, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#04060a] text-slate-400 border-t border-white/[0.08] relative overflow-hidden">
-      {/* Background ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-blue-600/5 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-white/[0.06]">
-          {/* Brand Info (2 cols on lg) */}
+    <footer className="bg-white dark:bg-black text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-zinc-200 dark:border-zinc-900">
+          {/* Brand Info (Agentic Page 3 style) */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-glow-brand/40">
-                <Activity size={18} className="text-white" />
+              <div className="w-8 h-8 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-sm">
+                <Activity size={18} />
               </div>
-              <div>
-                <span className="font-display font-extrabold text-xl text-white tracking-tight">MediCare</span>
-                <span className="text-xs text-blue-400 font-bold ml-1.5 uppercase tracking-wider">Clinic</span>
-              </div>
+              <span className="font-display font-extrabold text-lg text-zinc-950 dark:text-white tracking-tight">
+                MediCare
+              </span>
             </Link>
-            
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Comprehensive internal medicine and patient-first outpatient healthcare led by Dr. Vishal Kashyap. Delivering zero-wait clinical appointments and compassionate family wellness in Moradabad.
+
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-sm">
+              Comprehensive internal medicine and patient-first outpatient care led by Dr. Vishal Kashyap. Delivering zero-wait clinical appointments and compassionate family wellness in Moradabad.
             </p>
 
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              Accepting New Patients • Walk-ins & Online Tokens
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Accepting Patients • Walk-ins & Online Tokens
             </div>
 
-            <div className="pt-2 text-xs text-slate-500 flex items-center gap-2">
-              <ShieldCheck size={14} className="text-blue-400" />
-              <span>Accreditation: AIIMS Alumni • IMA Reg. 42091</span>
-            </div>
+            <p className="text-[11px] text-zinc-400 dark:text-zinc-500 font-mono">
+              Accreditation: AIIMS Alumni • IMA Reg. 42091
+            </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">Platform</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-zinc-950 dark:text-white font-semibold mb-3.5 text-xs uppercase tracking-wider font-mono">
+              Navigation
+            </h4>
+            <ul className="space-y-2 text-xs">
               {[
-                ['/', 'Overview & Queue'],
+                ['/', 'Overview & Triage'],
                 ['/about', 'Dr. Vishal Kashyap'],
-                ['/services', 'All Specializations'],
+                ['/services', 'All Services'],
                 ['/appointment', 'Instant Token Booking'],
-                ['/contact', 'Clinic Location & Timings'],
-                ['/login', 'Doctor / Staff Portal'],
+                ['/contact', 'Contact & Timings'],
+                ['/login', 'Admin Console'],
               ].map(([href, label]) => (
                 <li key={href}>
-                  <Link href={href} className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
-                    <ArrowRight size={12} className="text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                  <Link href={href} className="hover:text-zinc-950 dark:hover:text-white transition-colors">
                     {label}
                   </Link>
                 </li>
@@ -61,21 +54,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Specializations */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">Specialties</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-zinc-950 dark:text-white font-semibold mb-3.5 text-xs uppercase tracking-wider font-mono">
+              Specialties
+            </h4>
+            <ul className="space-y-2 text-xs">
               {[
                 'General Health Checkup',
                 'Diabetes & HbA1c Care',
                 'Hypertension & Cardiac',
-                'Pediatrics & Child Health',
+                'Pediatrics & Child Care',
                 'Dermatology & Skin',
                 'Preventive Wellness',
               ].map((s) => (
                 <li key={s}>
-                  <Link href="/services" className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group">
-                    <ArrowRight size={12} className="text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                  <Link href="/services" className="hover:text-zinc-950 dark:hover:text-white transition-colors">
                     {s}
                   </Link>
                 </li>
@@ -83,42 +77,40 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact & Hours */}
+          {/* Contact Details */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-wider font-mono">Clinic Access</h4>
-            <ul className="space-y-3.5">
-              <li className="flex items-start gap-2.5 text-xs text-slate-400">
-                <MapPin size={15} className="text-blue-400 shrink-0 mt-0.5" />
-                <span>42, Kafiyabad, Moradabad, Uttar Pradesh 244001</span>
+            <h4 className="text-zinc-950 dark:text-white font-semibold mb-3.5 text-xs uppercase tracking-wider font-mono">
+              Clinic Contact
+            </h4>
+            <ul className="space-y-2.5 text-xs font-mono">
+              <li className="flex items-start gap-2">
+                <MapPin size={13} className="shrink-0 mt-0.5 text-zinc-400" />
+                <span>42, Kafiyabad, Moradabad, UP 244001</span>
               </li>
               <li>
-                <a href="tel:+919568549366" className="flex items-center gap-2.5 text-xs text-slate-300 hover:text-white transition-colors font-medium">
-                  <Phone size={14} className="text-blue-400 shrink-0" />
+                <a href="tel:+919568549366" className="flex items-center gap-2 hover:text-zinc-950 dark:hover:text-white transition-colors">
+                  <Phone size={13} className="shrink-0 text-zinc-400" />
                   +91 95685 49366
                 </a>
               </li>
               <li>
-                <a href="mailto:dr.arjun@medicareclinic.in" className="flex items-center gap-2.5 text-xs text-slate-400 hover:text-white transition-colors">
-                  <Mail size={14} className="text-blue-400 shrink-0" />
+                <a href="mailto:care@medicareclinic.in" className="flex items-center gap-2 hover:text-zinc-950 dark:hover:text-white transition-colors">
+                  <Mail size={13} className="shrink-0 text-zinc-400" />
                   care@medicareclinic.in
                 </a>
               </li>
-              <li className="flex items-start gap-2.5 text-xs text-slate-400">
-                <Clock size={14} className="text-blue-400 shrink-0 mt-0.5" />
-                <span>Mon–Sat: 9AM–1PM & 5PM–7PM<br />Sun: 10AM–12PM (Morning)</span>
+              <li className="flex items-start gap-2">
+                <Clock size={13} className="shrink-0 mt-0.5 text-zinc-400" />
+                <span>Mon–Sat: 9AM–1PM & 5PM–7PM</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-500">
-          <p>© 2026 MediCare Clinic. Dedicated to high-trust community healthcare in Moradabad.</p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">
-              Built with precision <Heart size={11} className="text-red-500 fill-red-500 mx-0.5" /> for clinical excellence
-            </span>
-          </div>
+        {/* Bottom bar (Agentic Page 3 style) */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[11px] text-zinc-500 font-mono">
+          <p>© 2026 MediCare Clinic. All rights reserved.</p>
+          <p>Your medical data is strictly private and HIPAA protected.</p>
         </div>
       </div>
     </footer>

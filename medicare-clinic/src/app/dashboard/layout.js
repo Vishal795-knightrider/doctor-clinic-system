@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Activity, LayoutDashboard, Calendar, Users, Settings, LogOut, Menu, X, Bell, ChevronDown, ShieldCheck } from 'lucide-react';
+import { Activity, LayoutDashboard, Calendar, Users, Settings, LogOut, Menu, X, Bell, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 const NAV = [
   { href: '/dashboard',              icon: LayoutDashboard, label: 'Overview' },
@@ -15,32 +16,33 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme, mounted } = useTheme();
 
   const isActive = (href) => pathname === href;
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-[#080c16] text-slate-300 border-r border-white/[0.08]">
+    <div className="flex flex-col h-full bg-zinc-50 dark:bg-[#08080a] text-zinc-800 dark:text-zinc-300 border-r border-zinc-200 dark:border-zinc-800 transition-colors">
       {/* Logo */}
-      <div className="px-6 py-6 border-b border-white/[0.06]">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-glow-brand/50">
-            <Activity size={20} className="text-white" />
+      <div className="px-6 py-5 border-b border-zinc-200 dark:border-zinc-800">
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-black dark:bg-white text-white dark:text-black rounded-lg flex items-center justify-center font-bold text-sm">
+            <Activity size={18} />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-display font-extrabold text-lg text-white tracking-tight">MediCare</span>
-              <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
+              <span className="font-display font-extrabold text-base text-zinc-950 dark:text-white tracking-tight">MediCare</span>
+              <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
                 Admin
               </span>
             </div>
-            <span className="block text-[10px] text-slate-500 font-mono">Moradabad Clinic</span>
+            <span className="block text-[10px] text-zinc-500 font-mono">Moradabad Clinic</span>
           </div>
         </Link>
       </div>
 
       {/* Nav links */}
-      <nav className="flex-1 px-3 py-6 space-y-1.5">
-        <p className="px-3 text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-2">
+      <nav className="flex-1 px-3 py-5 space-y-1">
+        <p className="px-3 text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2">
           Management
         </p>
         {NAV.map(({ href, icon: Icon, label }) => (
@@ -48,43 +50,43 @@ export default function DashboardLayout({ children }) {
             key={href}
             href={href}
             onClick={() => setSidebarOpen(false)}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all ${
+            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
               isActive(href)
-                ? 'bg-blue-600 text-white shadow-glow-brand/40 font-bold'
-                : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                ? 'bg-black dark:bg-white text-white dark:text-black font-semibold shadow-sm'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
-            <Icon size={17} />
+            <Icon size={16} />
             <span>{label}</span>
           </Link>
         ))}
       </nav>
 
       {/* User profile footer */}
-      <div className="p-4 border-t border-white/[0.06] space-y-2">
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#0e1526] border border-white/[0.05]">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-bold font-mono shrink-0">
+      <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 space-y-2">
+        <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800/80">
+          <div className="w-8 h-8 rounded-lg bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white flex items-center justify-center text-xs font-bold font-mono shrink-0">
             VK
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-white truncate">Dr. Vishal Kashyap</p>
-            <p className="text-[10px] text-slate-400 truncate font-mono">admin@medicare.com</p>
+            <p className="text-xs font-bold text-zinc-950 dark:text-white truncate">Dr. Vishal Kashyap</p>
+            <p className="text-[10px] text-zinc-500 truncate font-mono">admin@medicare.com</p>
           </div>
         </div>
 
         <button
           onClick={() => router.push('/login')}
-          className="flex items-center gap-2.5 w-full px-3 py-2 rounded-xl text-xs text-rose-400 hover:bg-rose-500/10 transition-colors font-medium"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 transition-colors font-medium"
         >
-          <LogOut size={15} />
-          <span>Sign Out of Console</span>
+          <LogOut size={14} />
+          <span>Sign Out</span>
         </button>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#06080e] text-slate-100 flex">
+    <div className="min-h-screen bg-zinc-100 dark:bg-black text-zinc-900 dark:text-white flex transition-colors duration-200">
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex flex-col w-64 fixed top-0 left-0 h-full z-30 shrink-0">
         <SidebarContent />
@@ -93,7 +95,7 @@ export default function DashboardLayout({ children }) {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
           <aside className="absolute left-0 top-0 h-full w-64 z-50 shadow-2xl">
             <SidebarContent />
           </aside>
@@ -103,49 +105,55 @@ export default function DashboardLayout({ children }) {
       {/* Main content area */}
       <div className="flex-1 flex flex-col lg:ml-64 min-w-0">
         {/* Top bar */}
-        <header className="bg-[#080c16]/80 backdrop-blur-xl border-b border-white/[0.08] px-4 sm:px-8 h-16 sm:h-18 flex items-center justify-between sticky top-0 z-20">
+        <header className="bg-white/90 dark:bg-[#08080a]/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 px-4 sm:px-8 h-16 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/10"
+              className="lg:hidden p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800"
               aria-label="Open sidebar"
             >
-              <Menu size={18} />
+              <Menu size={16} />
             </button>
 
-            <div className="flex items-center gap-2 text-xs text-slate-300 bg-white/[0.03] border border-white/[0.08] px-3.5 py-1.5 rounded-xl">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="font-medium">OPD Room 1 Active</span>
-              <span className="text-white/20">|</span>
-              <span className="text-slate-400 font-mono text-[11px]">Moradabad Main Wing</span>
+            <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="font-medium">OPD Active</span>
+              <span className="text-zinc-300 dark:text-zinc-700">|</span>
+              <span className="text-zinc-500 font-mono text-[11px]">Room 1</span>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Theme Toggle Button */}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors"
+                aria-label="Toggle theme"
+                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+              </button>
+            )}
+
             <button
-              className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/10 transition-colors relative"
+              className="p-2 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors relative"
               aria-label="Notifications"
             >
-              <Bell size={16} />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+              <Bell size={15} />
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-blue-500 rounded-full" />
             </button>
 
-            <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-xl">
-              <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs font-bold font-mono">
+            <div className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 rounded-xl">
+              <div className="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-[10px] font-bold font-mono">
                 VK
               </div>
-              <div className="hidden sm:block text-left">
-                <span className="block text-xs font-bold text-white leading-tight">Dr. Vishal</span>
-                <span className="block text-[9px] text-slate-400 font-mono">Super Admin</span>
-              </div>
+              <span className="text-xs font-semibold text-zinc-900 dark:text-white hidden sm:block">Dr. Vishal</span>
             </div>
           </div>
         </header>
 
-        {/* Page children */}
+        {/* Page content */}
         <main className="flex-1 p-4 sm:p-8 overflow-auto">{children}</main>
       </div>
     </div>

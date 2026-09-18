@@ -1,4 +1,5 @@
 import './globals.css';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata = {
   title: 'MediCare Clinic — Dr. Vishal Kashyap | Smart Digital Healthcare',
@@ -12,8 +13,11 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="bg-[#06080e] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white">{children}</body>
+      <body className="bg-white text-slate-900 dark:bg-black dark:text-white min-h-screen transition-colors duration-200">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
-

@@ -2,10 +2,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Activity, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowRight, Sun, Moon, Sparkles, Activity } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 const LINKS = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'Overview' },
   { href: '/about', label: 'Doctor Profile' },
   { href: '/services', label: 'Services' },
   { href: '/appointment', label: 'Book Appointment' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { theme, toggleTheme, mounted } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -28,63 +30,32 @@ export default function Navbar() {
   const isActive = (href) => pathname === href;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
       scrolled
-        ? 'bg-[#06080e]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl'
-        : 'bg-[#06080e]/60 backdrop-blur-md border-b border-white/[0.05]'
+        ? 'bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/80 shadow-sm'
+        : 'bg-white/60 dark:bg-black/60 backdrop-blur-sm border-b border-zinc-200/50 dark:border-zinc-900/60'
     }`}>
-      {/* Top micro bar with live queue indicator */}
-      <div className="bg-gradient-to-r from-blue-950/60 via-slate-900/80 to-blue-950/60 border-b border-white/[0.05] text-xs py-1.5 px-4 hidden md:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-2 text-slate-300 font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              OPD Active • Dr. Vishal Kashyap On-Duty
-            </span>
-            <span className="text-white/20">|</span>
-            <span className="text-slate-400 flex items-center gap-1.5 text-[11px]">
-              <ShieldCheck size={12} className="text-blue-400" /> Moradabad, Uttar Pradesh
-            </span>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        {/* Logo matching Agentic screenshot */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold text-sm">
+            <Activity size={18} />
           </div>
-
-          <div className="flex items-center gap-4">
-            <a href="tel:+919568549366" className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors font-medium">
-              <Phone size={11} className="text-blue-400" /> +91 95685 49366
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-glow-brand/50 group-hover:scale-105 transition-transform">
-            <Activity size={20} className="text-white" />
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-display font-extrabold text-xl text-white tracking-tight">MediCare</span>
-              <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                Clinic
-              </span>
-            </div>
-            <span className="block text-[11px] text-slate-400 font-medium">Smart Healthcare Portal</span>
-          </div>
+          <span className="font-display font-extrabold text-lg text-zinc-900 dark:text-white tracking-tight">
+            MediCare
+          </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] p-1.5 rounded-2xl border border-white/[0.06]">
+        {/* Center Navigation Links (Clean Agentic Style) */}
+        <div className="hidden md:flex items-center gap-6">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-150 ${
+              className={`text-xs font-medium transition-colors ${
                 isActive(l.href)
-                  ? 'text-white bg-white/[0.1] shadow-sm font-semibold'
-                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                  ? 'text-zinc-950 dark:text-white font-semibold'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
               }`}
             >
               {l.label}
@@ -92,61 +63,85 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Action Buttons */}
+        {/* Right CTA and Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Light / Dark Mode Toggle Button */}
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors"
+              aria-label="Toggle theme"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+          )}
+
           <Link
             href="/login"
-            className="text-xs font-semibold px-3.5 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors border border-transparent hover:border-white/10"
+            className="text-xs font-medium px-3.5 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
           >
-            Admin Login
+            Admin Portal
           </Link>
+
           <Link
             href="/appointment"
-            className="btn-white text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 group"
+            className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 text-xs font-semibold px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5"
           >
             <span>Book Appointment</span>
-            <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight size={13} />
           </Link>
         </div>
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors border border-white/10"
-          aria-label="Toggle navigation menu"
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* Mobile menu and theme toggle */}
+        <div className="flex md:hidden items-center gap-2">
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white border border-zinc-200 dark:border-zinc-800"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+          )}
+          <button
+            onClick={() => setOpen(!open)}
+            className="p-2 rounded-lg text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800"
+            aria-label="Toggle navigation menu"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu */}
       {open && (
-        <div className="lg:hidden bg-[#0a0d16] border-b border-white/10 px-4 py-5 space-y-2 animate-fade-in shadow-2xl">
+        <div className="md:hidden bg-white dark:bg-black border-b border-zinc-200 dark:border-zinc-800 px-4 py-5 space-y-2">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+              className={`block px-3 py-2.5 rounded-lg text-xs font-medium ${
                 isActive(l.href)
-                  ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30 font-semibold'
-                  : 'text-slate-300 hover:bg-white/[0.05]'
+                  ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-semibold'
+                  : 'text-zinc-600 dark:text-zinc-400'
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <div className="pt-4 border-t border-white/10 flex flex-col gap-2.5">
+          <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex flex-col gap-2">
             <Link
               href="/login"
-              className="text-center px-4 py-3 rounded-xl border border-white/10 text-sm font-medium text-slate-300 hover:bg-white/[0.05]"
+              className="px-3 py-2 text-xs text-center border border-zinc-200 dark:border-zinc-800 rounded-lg text-zinc-700 dark:text-zinc-300"
             >
-              Admin Portal Login
+              Admin Portal
             </Link>
             <Link
               href="/appointment"
-              className="btn-primary justify-center text-sm"
+              className="btn-primary text-xs py-2.5 justify-center"
             >
-              Book Instant Appointment
+              Book Appointment
             </Link>
           </div>
         </div>

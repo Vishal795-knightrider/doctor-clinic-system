@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { FAKE_PATIENTS } from '@/lib/data';
-import { Search, Users, Phone, Mail, Activity, Trash2, Eye, Calendar, Sparkles } from 'lucide-react';
+import { Search, Users, Phone, Mail, Activity, Trash2, Eye } from 'lucide-react';
 
 export default function PatientsPage() {
   const [patients, setPatients] = useState(FAKE_PATIENTS);
@@ -25,45 +25,42 @@ export default function PatientsPage() {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white font-display">
-            Patient Registry
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            {patients.length} registered electronic health records (EHR) in Moradabad clinic.
-          </p>
-        </div>
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-zinc-950 dark:text-white font-display">
+          Patient Registry
+        </h1>
+        <p className="text-xs text-zinc-500 mt-0.5 font-mono">
+          {patients.length} registered patient medical records.
+        </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
-          { label: 'Total Patients', value: patients.length, color: 'text-blue-400 bg-blue-500/10 border-blue-500/20' },
-          { label: 'New This Month', value: 3, color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' },
-          { label: 'Repeat Care Visits', value: 7, color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20' },
+          { label: 'Total Patients', value: patients.length },
+          { label: 'New This Month', value: 3 },
+          { label: 'Repeat Care Visits', value: 7 },
           {
             label: 'Avg. Visits Per Patient',
             value: `${(patients.reduce((s, p) => s + p.visits, 0) / patients.length).toFixed(1)}x`,
-            color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
           },
-        ].map(({ label, value, color }) => (
+        ].map(({ label, value }) => (
           <div
             key={label}
-            className="bg-[#0b101c]/90 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 shadow-card hover:border-white/20 transition-all"
+            className="bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-sm"
           >
-            <div className={`w-8 h-8 rounded-lg border flex items-center justify-center mb-3 ${color}`}>
-              <Users size={15} />
+            <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white flex items-center justify-center mb-2.5">
+              <Users size={14} />
             </div>
-            <p className="text-2xl font-extrabold text-white font-display">{value}</p>
-            <p className="text-[11px] text-slate-400 mt-1 font-medium">{label}</p>
+            <p className="text-2xl font-extrabold text-zinc-950 dark:text-white font-mono">{value}</p>
+            <p className="text-[11px] text-zinc-500 mt-0.5">{label}</p>
           </div>
         ))}
       </div>
 
       {/* Search Filter */}
       <div className="relative max-w-sm">
-        <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+        <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
         <input
           className="input pl-9 text-xs"
           placeholder="Search by patient, phone, condition..."
@@ -72,85 +69,85 @@ export default function PatientsPage() {
         />
       </div>
 
-      {/* Dark Table */}
-      <div className="bg-[#0b101c]/90 backdrop-blur-xl border border-white/[0.08] rounded-3xl overflow-hidden shadow-card">
+      {/* Table */}
+      <div className="bg-white dark:bg-[#0c0c0e] border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-white/[0.06] bg-white/[0.02]">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
                 {['Patient', 'Contact Info', 'Primary Condition', 'Total Visits', 'Last Visit', 'Actions'].map((h) => (
                   <th
                     key={h}
-                    className="text-left text-[11px] font-mono uppercase tracking-wider text-slate-400 px-6 py-4"
+                    className="text-left text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-5 py-3.5"
                   >
                     {h}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/[0.04]">
+            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-900">
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-12 text-slate-500 text-xs font-mono">
+                  <td colSpan={6} className="text-center py-10 text-zinc-500 text-xs font-mono">
                     No matching patient records.
                   </td>
                 </tr>
               ) : (
                 filtered.map((p) => (
-                  <tr key={p.id} className="hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-4">
+                  <tr key={p.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors">
+                    <td className="px-5 py-3.5">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-xs font-bold text-white font-mono shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white flex items-center justify-center text-xs font-bold font-mono shrink-0">
                           {p.name.split(' ').map((n) => n[0]).join('')}
                         </div>
                         <div>
-                          <span className="font-semibold text-white text-sm block">{p.name}</span>
-                          <span className="text-[10px] text-slate-500 font-mono">ID #PT-10{p.id}</span>
+                          <span className="font-semibold text-zinc-950 dark:text-white text-xs block">{p.name}</span>
+                          <span className="text-[10px] text-zinc-400 font-mono">ID #PT-10{p.id}</span>
                         </div>
                       </div>
                     </td>
 
-                    <td className="px-6 py-4 font-mono text-xs">
-                      <p className="text-slate-200 flex items-center gap-1.5">
-                        <Phone size={11} className="text-slate-500" />
+                    <td className="px-5 py-3.5 font-mono text-xs">
+                      <p className="text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+                        <Phone size={11} className="text-zinc-400" />
                         {p.phone}
                       </p>
-                      <p className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                        <Mail size={11} className="text-slate-500" />
+                      <p className="text-[10px] text-zinc-500 flex items-center gap-1.5 mt-0.5">
+                        <Mail size={10} className="text-zinc-400" />
                         {p.email}
                       </p>
                     </td>
 
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-300 border border-blue-500/20 font-mono">
-                        <Activity size={11} /> {p.condition}
+                    <td className="px-5 py-3.5">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-mono">
+                        <Activity size={10} /> {p.condition}
                       </span>
                     </td>
 
-                    <td className="px-6 py-4 font-mono">
-                      <span className="text-sm font-bold text-white">{p.visits}</span>
-                      <span className="text-xs text-slate-400 ml-1">consults</span>
+                    <td className="px-5 py-3.5 font-mono text-xs">
+                      <span className="font-bold text-zinc-950 dark:text-white">{p.visits}</span>
+                      <span className="text-zinc-400 ml-1">visits</span>
                     </td>
 
-                    <td className="px-6 py-4 font-mono text-xs text-slate-300">
+                    <td className="px-5 py-3.5 font-mono text-xs text-zinc-600 dark:text-zinc-400">
                       {p.lastVisit}
                     </td>
 
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-2">
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => setSelected(p)}
-                          title="View Patient Record"
-                          className="p-2 rounded-xl text-blue-400 hover:bg-blue-500/10 border border-transparent hover:border-blue-500/20 transition-all"
+                          title="View Record"
+                          className="p-1.5 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800"
                         >
-                          <Eye size={16} />
+                          <Eye size={15} />
                         </button>
                         <button
                           onClick={() => setDeleteId(p.id)}
                           title="Remove Record"
-                          className="p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 transition-all"
+                          className="p-1.5 rounded-lg text-rose-600 dark:text-rose-400 hover:bg-rose-500/10"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={15} />
                         </button>
                       </div>
                     </td>
@@ -161,44 +158,42 @@ export default function PatientsPage() {
           </table>
         </div>
 
-        <div className="px-6 py-3 border-t border-white/[0.06] text-xs text-slate-500 font-mono">
+        <div className="px-5 py-2.5 border-t border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-500 font-mono">
           Showing {filtered.length} of {patients.length} patients
         </div>
       </div>
 
       {/* Patient Record Modal */}
       {selected && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#0e1628] border border-white/10 rounded-3xl shadow-2xl p-8 max-w-md w-full space-y-6">
-            <div className="flex items-center gap-4 pb-4 border-b border-white/[0.08]">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-xl font-bold text-white font-mono shadow-glow-brand/30">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#0e0e12] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl p-6 max-w-md w-full space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="w-10 h-10 bg-zinc-200 dark:bg-zinc-800 rounded-xl flex items-center justify-center font-bold text-zinc-950 dark:text-white font-mono">
                 {selected.name.split(' ').map((n) => n[0]).join('')}
               </div>
               <div>
-                <h3 className="font-bold text-white text-lg">{selected.name}</h3>
-                <p className="text-xs text-blue-400 font-mono">{selected.condition}</p>
-                <p className="text-[10px] text-slate-400 font-mono">Patient Record #PT-10{selected.id}</p>
+                <h3 className="font-bold text-zinc-950 dark:text-white text-sm">{selected.name}</h3>
+                <p className="text-xs text-zinc-500 font-mono">{selected.condition}</p>
               </div>
             </div>
 
-            <div className="space-y-2.5 font-mono text-xs">
+            <div className="space-y-2 font-mono text-xs">
               {[
                 ['Phone Contact', selected.phone],
                 ['Email Address', selected.email],
-                ['Total Visits', `${selected.visits} consultations`],
+                ['Total Visits', `${selected.visits} visits`],
                 ['Last Recorded Visit', selected.lastVisit],
-                ['Attending Physician', 'Dr. Vishal Kashyap, MD'],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between bg-[#070a12] p-3 rounded-xl border border-white/[0.05]">
-                  <span className="text-slate-400">{k}</span>
-                  <span className="text-white font-semibold">{v}</span>
+                <div key={k} className="flex justify-between bg-zinc-50 dark:bg-zinc-900/60 p-2.5 rounded-lg">
+                  <span className="text-zinc-500">{k}</span>
+                  <span className="text-zinc-900 dark:text-white font-semibold">{v}</span>
                 </div>
               ))}
             </div>
 
             <button
               onClick={() => setSelected(null)}
-              className="btn-white w-full py-3 text-xs font-semibold rounded-xl"
+              className="btn-primary w-full py-2 text-xs font-semibold rounded-xl"
             >
               Close Record
             </button>
@@ -208,25 +203,25 @@ export default function PatientsPage() {
 
       {/* Delete Modal */}
       {deleteId && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#0e1628] border border-white/10 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center space-y-4">
-            <div className="w-14 h-14 bg-rose-500/10 border border-rose-500/20 rounded-2xl flex items-center justify-center mx-auto text-rose-400">
-              <Trash2 size={24} />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#0e0e12] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl p-6 max-w-sm w-full text-center space-y-3">
+            <div className="w-10 h-10 bg-rose-500/10 text-rose-500 rounded-xl flex items-center justify-center mx-auto">
+              <Trash2 size={20} />
             </div>
-            <h3 className="font-semibold text-white text-lg">Remove Patient Record?</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              This will remove the patient from active clinic logs. This action cannot be undone.
+            <h3 className="font-semibold text-zinc-950 dark:text-white text-base">Remove Patient?</h3>
+            <p className="text-zinc-500 text-xs">
+              This will permanently remove the patient record from clinic registry.
             </p>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-2 pt-2">
               <button
                 onClick={() => setDeleteId(null)}
-                className="btn-glass flex-1 text-xs py-3 rounded-xl"
+                className="btn-glass flex-1 text-xs py-2 rounded-xl"
               >
                 Cancel
               </button>
               <button
                 onClick={() => remove(deleteId)}
-                className="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs py-3 rounded-xl transition-colors"
+                className="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs py-2 rounded-xl"
               >
                 Remove
               </button>
