@@ -11,7 +11,7 @@ const PARTNERS = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden hero-grid-pattern pt-20 pb-20 border-b border-zinc-200 dark:border-zinc-900 transition-colors duration-200">
+    <section className="relative overflow-hidden bg-white dark:bg-black pt-20 pb-20 border-b border-zinc-200 dark:border-zinc-900 transition-colors duration-200">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Top Centered Pill (Agentic Screenshot: AI Efficiency) */}
         <div className="flex justify-center mb-8">
